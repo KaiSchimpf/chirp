@@ -753,7 +753,7 @@ The GET endpoint should be unaffected and behave as before.
 ### Positive Testing the Posts API
 
 Now, if we signup and login we should be able to call the POST method on the **/api/posts** endpoint:
-
+To send the username and password data use the payload 'form' area.
 ![](ScreenShots/ss3.png)
 ![](ScreenShots/ss5.png)
 
