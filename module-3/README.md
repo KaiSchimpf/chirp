@@ -277,15 +277,15 @@ router.route('/posts/:id')
 	
 	//create
 	.put(function(req,res){
-		return res.send({message:'TODO modify an existing post by using param ' + req.param.id});
+		return res.send({message:'TODO modify an existing post by using param ' + req.params.id});
 	})
 
 	.get(function(req,res){
-		return res.send({message:'TODO get an existing post by using param ' + req.param.id});
+		return res.send({message:'TODO get an existing post by using param ' + req.params.id});
 	})
 
 	.delete(function(req,res){
-		return res.send({message:'TODO delete an existing post by using param ' + req.param.id})
+		return res.send({message:'TODO delete an existing post by using param ' + req.params.id})
 	});
 
 module.exports = router;
@@ -548,7 +548,7 @@ Finally the serialize and deserialize handlers need to be provided a unique ID f
 passport.serializeUser(function(user, done) {
 	console.log('serializing user:',user.username);
 	//return the unique id for the user
-	done(null, user.username);
+	retrun done(null, user.username);
 });
 
 //Desieralize user will call with the unique id provided by serializeuser
@@ -566,14 +566,14 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var LocalStrategy   = require('passport-local').Strategy;
 var bCrypt = require('bcrypt-nodejs');
-users = {};
+var users = {};
 module.exports = function(passport){
 
 	// Passport needs to be able to serialize and deserialize users to support persistent login sessions
 	passport.serializeUser(function(user, done) {
 		console.log('serializing user:',user.username);
 		//return the unique id for the user
-		done(null, user.username);
+		return done(null, user.username);
 	});
 
 	//Desieralize user will call with the unique id provided by serializeuser
@@ -588,7 +588,7 @@ module.exports = function(passport){
 		},
 		function(req, username, password, done) { 
 
-			if(users[username]){
+			if(!users[username]){
 				console.log('User Not Found with username '+username);
 				return done(null, false);
 			}
